@@ -19,10 +19,9 @@ function [] = MoveMotor(motors, desPosition)
             if desMove < 0
                 m.Power = -m.Power;
             end
-            motors(i) = m;
-            cat(2,activeMotors, [m]);
         end
-        
+        motors(i) = m;
+        cat(2,activeMotors, [m]);
     end
 
 
@@ -30,7 +29,7 @@ function [] = MoveMotor(motors, desPosition)
         i.SendToNXT();
     end
     
-    for i = activeMotors
+    for i = motors
        i.WaitFor();
     end
     

@@ -10,13 +10,15 @@ COM_SetDefaultNXT(h);
 
 
 
-mA = NXTMotor('A', 'Power', 30, 'TachoLimit', 1, 'ActionAtTachoLimit', 'HoldBrake');
-mB = NXTMotor('B', 'Power',-30, 'TachoLimit', 1, 'ActionAtTachoLimit', 'HoldBrake');
-mC = NXTMotor('C', 'Power',-30, 'TachoLimit', 1, 'ActionAtTachoLimit', 'HoldBrake');
+mA = NXTMotor('A', 'Power', 30, 'TachoLimit', 90, 'ActionAtTachoLimit', 'HoldBrake');
+% mB = NXTMotor('B', 'Power',-30, 'TachoLimit', 1, 'ActionAtTachoLimit', 'HoldBrake');
+% mC = NXTMotor('C', 'Power',-30, 'TachoLimit', 1, 'ActionAtTachoLimit', 'HoldBrake');
 
 
 mA.SendToNXT();
-mB.SendToNXT();
-mC.SendToNXT();
+% mB.SendToNXT();
+% mC.SendToNXT();
+
+mA.WaitFor();
 
 COM_CloseNXT(COM_GetDefaultNXT());
