@@ -33,7 +33,5 @@ function [] = MoveMotor(motors, desPosition)
     for i = activeMotors
        i.WaitFor();
     end
-    
-    disp('All Done');
 
 end

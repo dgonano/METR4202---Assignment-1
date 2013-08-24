@@ -16,10 +16,9 @@ Disp('Staring read...');
 PointsXYZ = ReadFile();
 
 %send points to thomas to get angles back
-disp('Getting angles...');
-arrayAngles = [];
+%temporarily use points array
+arrayAngles = PointsXYZ;
 
-disp('Applying Gear ratios...');
 arrayGears = ApplyGears(arrayAngles);
 
 arraySize = size(arrayGears);
@@ -30,13 +29,6 @@ else
     numMoves = arraySize(3);
 end
 
-begin = input('Begin? (y/n):', 's');
-if(begin ~= 'y')
-    %exit if anything but yes
-    return;
-end
-
-disp('Begining Moves...');
 for m = 1 : numMoves
     for s = 1 : arraySize(1)
         MoveMotor(motors, arrayGears(s, :, m));
@@ -46,7 +38,6 @@ for m = 1 : numMoves
     pause(pauseTime);
 end
 
-disp('Program Finished!');
 %close NXT connection
 COM_CloseNXT(COM_GetDefaultNXT());
 end
