@@ -17,7 +17,7 @@ PointsXYZ = ReadFile();
 
 %send points to thomas to get angles back
 disp('Getting angles...');
-arrayAngles = [];
+arrayAngles = []; %change this
 
 disp('Applying Gear ratios...');
 arrayGears = ApplyGears(arrayAngles);
@@ -46,8 +46,8 @@ for m = 1 : numMoves
     pause(pauseTime);
 end
 
-disp('Program Finished!');
 %close NXT connection
 COM_CloseNXT(COM_GetDefaultNXT());
+disp('Program Finished!');
 end
 

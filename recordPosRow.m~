@@ -1,0 +1,29 @@
+function [ rowData ] = recordPosRow( )
+%RECORDPOSROW Summary of this function goes here
+%   Detailed explanation goes here
+rowData = zeros(3,10);
+start = input('zero robot? (space):', 's');
+if start == ' '
+    ResetNXT();
+elseif
+    return
+end
+
+mA = NXTMotor('A');
+mB = NXTMotor('B');
+mC = NXTMotor('C');
+
+for (
+    record = input('record pos ' + '? (space):', 's');
+    if record == ' '
+        posA = mA.ReadFromNXT();
+        posB = mB.ReadFromNXT();
+        posC = mC.ReadFromNXT();
+        rowData(:,i) = [posA.position, posB.position, posC.position];
+    end
+    rowData(:,i) = [posA.position, posB.position, posC.position];
+end
+
+
+end
+
