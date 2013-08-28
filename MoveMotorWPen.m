@@ -1,11 +1,7 @@
-function [] = MoveMotor(motors, desPosition)
+function [] = MoveMotorWPen(motors, desPosition)
     %both must be arrays, [ , , , ]
     activeMotors = [];
-    AOFFSET = 15;
-    BOFFSET1 = 6;
-    BOFFSET2 = 14;
-    CompAngle1 = 38;
-    CompAngle2 = 50;
+    OFFSET = 14;
     
     desPosition(1) = round(desPosition(1)*56/24);
     desPosition(2) = round(desPosition(2)*36/16);
@@ -15,36 +11,26 @@ function [] = MoveMotor(motors, desPosition)
         return;
     end
     
-    if desPosition(2) > CompAngle2*56/24
-        desPosition(2) = desPosition(2) - BOFFSET2;
-        disp('Compensated B2');
-    elseif desPosition(2) > CompAngle1*56/24
-        desPosition(2) = desPosition(2) - BOFFSET1;
-        disp('Compensated B1');
-    end
-    
     for i = 1 : length(motors)
         
         m = motors(i);
-        
         position = m.ReadFromNXT();
         desMove = desPosition(i) - position.Position;
-
         
         if desMove == 0 
-%             disp('Done, No move');
+            disp('Done, No move');
         else
-            m = NXTMotor(m.Port, 'Power', 20, 'TachoLimit', abs(desMove), 'ActionAtTachoLimit', 'HoldBrake');
+            m = NXTMotor(m.Port, 'Power', 10, 'TachoLimit', abs(desMove), 'ActionAtTachoLimit', 'HoldBrake');
             if desMove < 0
                 m.Power = -m.Power;
                 if m.Port == 0
-                    m.TachoLimit = m.TachoLimit + AOFFSET;
-                    disp('Compensated A');
+                    m.TachoLimit = m.TachoLimit + OFFSET;
+                    disp('compensated');
                 end
                 
             end
             motors(i) = m;
-            activeMotors = cat(2,activeMotors, [m]);
+            activeMotors = cat(2,activeMotors, m);
         end
         
     end
