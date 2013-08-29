@@ -34,7 +34,7 @@ function [] = MoveMotor(motors, desPosition)
         if desMove == 0 
 %             disp('Done, No move');
         else
-            m = NXTMotor(m.Port, 'Power', 20, 'TachoLimit', abs(desMove), 'ActionAtTachoLimit', 'HoldBrake');
+            m = NXTMotor(m.Port, 'Power', 100, 'TachoLimit', abs(desMove), 'ActionAtTachoLimit', 'HoldBrake');
             if desMove < 0
                 m.Power = -m.Power;
                 if m.Port == 0

@@ -28,7 +28,7 @@ if(begin ~= 'y')
     %exit if anything but yes
     return;
 end
-for i = 1 : 3
+for i = 1 : 4
     disp('Begining Moves...');
     for m = 1 : numMoves
         MoveMotorWObs(motors, arrayAngles(m,:));
